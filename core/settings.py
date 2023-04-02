@@ -1,6 +1,6 @@
-import os, environ
+import os
 
-env = environ.Env(
+env = os.environ.Env(
     # set casting, default value
     DEBUG=(bool, True)
 )
@@ -10,7 +10,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Take environment variables from .env file
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+os.environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY', default="B#$t_T@$k_m@n@96r")
@@ -19,7 +19,7 @@ SECRET_KEY = env('SECRET_KEY', default="B#$t_T@$k_m@n@96r")
 DEBUG = env('DEBUG')
 
 # Assets Management
-ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')
+ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets') 
 
 # load production server from .env
 ALLOWED_HOSTS        = ['localhost', 'localhost:85', '127.0.0.1',               env('SERVER', default='127.0.0.1') ]
@@ -119,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-AUTH_USER_MODEL = "apps_manager.Worker"
+AUTH_USER_MODEL = "manager.Worker"
 
 LANGUAGE_CODE = 'en-us'
 
