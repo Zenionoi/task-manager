@@ -1,6 +1,7 @@
 import os
+import environ
 
-env = os.environ.Env(
+env = environ.Env(
     # set casting, default value
     DEBUG=(bool, True)
 )
@@ -10,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Take environment variables from .env file
-os.environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY', default="B#$t_T@$k_m@n@96r")
