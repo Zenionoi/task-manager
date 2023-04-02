@@ -119,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-AUTH_USER_MODEL = "manager.Worker"
+AUTH_USER_MODEL = "apps_manager.Worker"
 
 LANGUAGE_CODE = 'en-us'
 
