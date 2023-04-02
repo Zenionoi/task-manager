@@ -1,5 +1,4 @@
-import os
-from os import environ
+import os, environ
 
 env = environ.Env(
     # set casting, default value
@@ -35,6 +34,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "crispy_bootstrap5",
+    'crispy_forms',
+    'apps.manager',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.context_processors.cfg_assets_root',
             ],
         },
     },
@@ -115,6 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
+
+AUTH_USER_MODEL = "manager.Worker"
 
 LANGUAGE_CODE = 'en-us'
 
