@@ -21,8 +21,8 @@ SECRET_KEY = env("SECRET_KEY", default="")
 ASSETS_ROOT = os.getenv("ASSETS_ROOT", "/static/assets")
 
 # load production server from .env
-ALLOWED_HOSTS        = ["https://task-manager-619q.onrender.com", "localhost", "localhost:85", "127.0.0.1",               env("SERVER", default="127.0.0.1")]
-CSRF_TRUSTED_ORIGINS = ["https://task-manager-619q.onrender.com", "http://localhost:85", "http://127.0.0.1", "https://" + env("SERVER", default="127.0.0.1")]
+ALLOWED_HOSTS        = ["https://task-manager-619q.onrender.com",              env("SERVER", default="127.0.0.1")]
+CSRF_TRUSTED_ORIGINS = ["https://task-manager-619q.onrender.com", "https://" + env("SERVER", default="127.0.0.1")]
 
 # Application definition
 
