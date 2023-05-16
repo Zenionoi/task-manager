@@ -4,7 +4,7 @@ import dj_database_url
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, True)
+    DEBUG=(bool, False)
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -15,14 +15,14 @@ CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY', default="B#$t_T@$k_m@n@Ge7%^&*vl$wj8b__pq2*#Y&#5vpo40(&^*no/*7")
+SECRET_KEY = env("SECRET_KEY", default="")
 
 # Assets Management
-ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets') 
+ASSETS_ROOT = os.getenv("ASSETS_ROOT", "/static/assets")
 
 # load production server from .env
-ALLOWED_HOSTS        = ["task-manager-619q.onrender.com", 'localhost', 'localhost:85', '127.0.0.1',               env('SERVER', default='127.0.0.1') ]
-CSRF_TRUSTED_ORIGINS = ["task-manager-619q.onrender.com", 'http://localhost:85', 'http://127.0.0.1', 'https://' + env('SERVER', default='127.0.0.1') ]
+ALLOWED_HOSTS        = ["https://task-manager-619q.onrender.com", "localhost", "localhost:85", "127.0.0.1",               env("SERVER", default="127.0.0.1")]
+CSRF_TRUSTED_ORIGINS = ["https://task-manager-619q.onrender.com", "http://localhost:85", "http://127.0.0.1", "https://" + env("SERVER", default="127.0.0.1")]
 
 # Application definition
 
@@ -79,9 +79,13 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": os.getenv("POSTGRES_HOST"),
+        "PORT": os.getenv("POSTGRES_PORT"),
     }
 }
 
