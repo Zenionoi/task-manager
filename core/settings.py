@@ -4,7 +4,7 @@ import dj_database_url
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, True)
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -15,14 +15,14 @@ CORE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY", default="")
+SECRET_KEY = env("SECRET_KEY", default="SECRET_KEY")
 
 # Assets Management
 ASSETS_ROOT = os.getenv("ASSETS_ROOT", "/static/assets")
 
 # load production server from .env
-ALLOWED_HOSTS        = ["https://task-manager-619q.onrender.com",              env("SERVER", default="127.0.0.1")]
-CSRF_TRUSTED_ORIGINS = ["https://task-manager-619q.onrender.com", "https://" + env("SERVER", default="127.0.0.1")]
+ALLOWED_HOSTS        = ["task-manager-619q.onrender.com",              env("SERVER", default="127.0.0.1")]
+CSRF_TRUSTED_ORIGINS = ["task-manager-619q.onrender.com", "https://" + env("SERVER", default="127.0.0.1")]
 
 # Application definition
 
