@@ -2,46 +2,46 @@
 {% load crispy_forms_filters %}
 
 {% block content %}
-	<div class="container-fluid">
-	<h1>
-		Task list
-		<a href="{% url 'manager:task-create' %}" class="btn btn-primary link-to-page">
-			Create
-		</a>
-	</h1>
+  <div class="container-fluid">
+    <h1>
+      Task list
+      <a href="{% url 'manager:task-create' %}" class="btn btn-primary link-to-page">
+        Create
+      </a>
+    </h1>
 
-	<form action="" method="get" class="form-inline">
-		<div style="display: inline-block">{{ search_form|crispy }}</div>
-		<input class="btn btn-secondary" type="submit" value="🕵️" style="display: inline-block">
-	</form>
-	<br>
+    <form action="" method="get" class="form-inline">
+      <div style="display: inline-block">{{ search_form|crispy }}</div>
+      <input class="btn btn-secondary" type="submit" value="🕵️" style="display: inline-block">
+    </form>
+    <br>
 
-	{% if task_list %}
-		<ul>
-			{% for task in task_list %}
-				<hr>
-				<div class="task" style="background-color:
-						{% if task.is_completed %}
-							green
-						{% elif task.priority == 'U' %}
-							red
-						{% elif task.priority == 'I' %}
-							orange
-						{% elif task.priority == 'M' %}
-							yellow
-						{% else %}
-							blue
-						{% endif %}">
-				<a href="{% url 'manager:task-detail' pk=task.id %} ">
-					<p><strong>Name:</strong> {{ task.name }}</p>
-					<p><strong>TaskType:</strong> {{ task.tasktype.name }}</p>
-					<p class="text-muted"><strong>Id:</strong> {{ task.id }}</p>
-				</a>
-				</div>
-			{% endfor %}
-		</ul>
-	{% else %}
-		<p>There are no tasks in manager</p>
-	{% endif %}
+    {% if task_list %}
+      <ul>
+        {% for task in task_list %}
+          <hr>
+          <div class="task" style="background-color:
+              {% if task.is_completed %}
+                green
+              {% elif task.priority == 'U' %}
+                red
+              {% elif task.priority == 'I' %}
+                orange
+              {% elif task.priority == 'M' %}
+                yellow
+              {% else %}
+                blue
+              {% endif %}">
+            <a href="{% url 'manager:task-detail' pk=task.id %} ">
+              <p><strong>Name:</strong> {{ task.name }}</p>
+              <p><strong>TaskType:</strong> {{ task.tasktype.name }}</p>
+              <p class="text-muted"><strong>Id:</strong> {{ task.id }}</p>
+            </a>
+          </div>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>There are no tasks in manager</p>
+    {% endif %}
+  </div>
 {% endblock %}
-</div>
