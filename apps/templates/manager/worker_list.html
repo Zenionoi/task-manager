@@ -34,8 +34,22 @@
             <td>{{ worker.position }}</td>
           </tr>
         {% endfor %}
-
       </table>
+      {% if is_paginated %}
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}" class="d-inline p-2 btn btn-secondary">Previous</a>
+        {% else %}
+          <button type="button" class="d-inline p-2 btn btn-secondary btn-lg" disabled>Previous</button>
+        {% endif %}
+
+        <h4 class="d-inline p-2 current-page">{{ page_obj.number }}</h4>
+
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}" class="d-inline p-2 btn btn-secondary">Next</a>
+        {% else %}
+          <button type="button" class="d-inline p-2 btn btn-secondary btn-lg" disabled>Next</button>
+        {% endif %}
+      {% endif %}
     {% else %}
       <p>There are no workers in the service.</p>
     {% endif %}
