@@ -22,22 +22,23 @@
       <h4>Tasks</h4>
 
       {% for task in worker.tasks.all %}
-        <hr>
-        <div class="task" style="background-color:
-            {% if task.is_completed %}
-              green
-            {% elif task.priority == 'U' %}
-              red
-            {% elif task.priority == 'I' %}
-              orange
-            {% elif task.priority == 'M' %}
-              yellow
-            {% else %}
-              blue
-            {% endif %}">
-          <p><strong>Name:</strong> {{ task.name }}</p>
-          <p><strong>TaskType:</strong> {{ task.tasktype.name }}</p>
-          <p class="text-muted"><strong>Id:</strong> {{ task.id }}</p>
+        <div class="card {% if task.is_completed %}
+                text-white bg-success
+              {% elif task.priority == 'U' %}
+                text-white bg-danger
+              {% elif task.priority == 'I' %}
+                text-dark bg-warning
+              {% elif task.priority == 'M' %}
+                text-dark bg-info
+              {% else %}
+                text-dark bg-light
+              {% endif %} mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ task.name }} <span class="badge bg-dark">ID: {{ task.id }}</span></h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ task.tasktype.name }}</h6>
+            <p class="card-text">{{ task.description }}</p>
+            <a href="{% url 'manager:task-detail' pk=task.id %}" class="card-link">Task detail</a>
+          </div>
         </div>
       {% empty %}
         <p>No tasks!</p>

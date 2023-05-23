@@ -1,41 +1,43 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
-  <h1>
-    {{ task.name }}
-    <a href="{% url 'manager:task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
+  <div class="container-fluid">
+    <h1>
+      {{ task.name }}
+      <a href="{% url 'manager:task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
+        Delete
+      </a>
 
-    <a href="{% url 'manager:task-update' pk=task.id %}" class="btn btn-secondary link-to-page">
-      Update
-    </a>
-  </h1>
-  <div class="row">
-    <div class="col-auto"><h4>Description: </h4></div>
-    <div class="col-auto"><h5>{{ task.description }}</h5></div>
+      <a href="{% url 'manager:task-update' pk=task.id %}" class="btn btn-secondary link-to-page">
+        Update
+      </a>
+    </h1>
+    <div class="row">
+      <div class="col-auto"><h4>Description: </h4></div>
+      <div class="col-auto"><h5>{{ task.description }}</h5></div>
+    </div>
+
+    <h1>
+      Workers
+
+      {% if task in user.tasks.all %}
+        <a href="{% url 'manager:toggle-task-assign' pk=task.id %}" class="btn btn-danger link-to-page">
+          Delete me from this task
+        </a>
+      {% else %}
+        <a href="{% url 'manager:toggle-task-assign' pk=task.id %}" class="btn btn-success link-to-page">
+          Assign me to this task
+        </a>
+      {% endif %}
+
+    </h1>
+    <hr>
+    <ul>
+      {% for worker in task.assigners.all %}
+        <li><h5>{{ worker.first_name }} {{ worker.last_name }} ({{ worker.username }})</h5></li>
+      {% empty %}
+        <p>No assigners!</p>
+      {% endfor %}
+    </ul>
   </div>
-
-  <h1>
-    Workers
-
-    {% if task in user.tasks.all %}
-      <a href="{% url 'manager:toggle-task-assign' pk=task.id %}" class="btn btn-danger link-to-page">
-        Delete me from this task
-      </a>
-    {% else %}
-      <a href="{% url 'manager:toggle-task-assign' pk=task.id %}" class="btn btn-success link-to-page">
-        Assign me to this task
-      </a>
-    {% endif %}
-
-  </h1>
-  <hr>
-  <ul>
-    {% for worker in task.assigners.all %}
-      <li><h5>{{ worker.first_name }} {{ worker.last_name }} ({{ worker.username }})</h5></li>
-    {% empty %}
-      <p>No assigners!</p>
-    {% endfor %}
-  </ul>
 {% endblock %}
