@@ -32,7 +32,7 @@
   </h1>
   <hr>
   <ul>
-    {% for worker in task.assignees.all %}
+    {% for worker in task.assigners.all %}
       <li><h5>{{ worker.first_name }} {{ worker.last_name }} ({{ worker.username }})</h5></li>
     {% empty %}
       <p>No assigners!</p>

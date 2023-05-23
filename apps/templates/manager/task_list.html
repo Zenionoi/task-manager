@@ -14,50 +14,35 @@
       <div style="display: inline-block">{{ search_form|crispy }}</div>
       <input class="btn btn-secondary" type="submit" value="🕵️" style="display: inline-block">
     </form>
-    <br>
-
-    {% if task_list %}
-      <ul>
-        {% for task in task_list %}
-          <hr>
-          <div class="task" style="background-color:
-              {% if task.is_completed %}
-                green
-              {% elif task.priority == 'U' %}
-                red
-              {% elif task.priority == 'I' %}
-                orange
-              {% elif task.priority == 'M' %}
-                yellow
-              {% else %}
-                blue
-              {% endif %}">
-            <a href="{% url 'manager:task-detail' pk=task.id %}"
-               {% if task.priority == 'D' %}style="color:white"{% endif %}>
-              <p><strong>Name:</strong> {{ task.name }}</p>
-              <p><strong>TaskType:</strong> {{ task.tasktype.name }}</p>
-              <p><strong>Id:</strong> {{ task.id }}</p>
-            </a>
-          </div>
-        {% endfor %}
-      </ul>
-      {% if is_paginated %}
-        {% if page_obj.has_previous %}
-          <a href="?page={{ page_obj.previous_page_number }}" class="d-inline p-2 btn btn-secondary">Previous</a>
-        {% else %}
-          <button type="button" class="d-inline p-2 btn btn-secondary btn-lg" disabled>Previous</button>
-        {% endif %}
-
-        <h4 class="d-inline p-2 current-page">{{ page_obj.number }}</h4>
-
-        {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}" class="d-inline p-2 btn btn-secondary">Next</a>
-        {% else %}
-          <button type="button" class="d-inline p-2 btn btn-secondary btn-lg" disabled>Next</button>
-        {% endif %}
-      {% endif %}
-    {% else %}
-      <p>There are no tasks in manager</p>
-    {% endif %}
   </div>
+  {% if task_list %}
+    <ul>
+      {% for task in task_list %}
+        <div class="card {% if task.is_completed %}
+                text-white bg-success
+              {% elif task.priority == 'U' %}
+                text-white bg-danger
+              {% elif task.priority == 'I' %}
+                text-dark bg-warning
+              {% elif task.priority == 'M' %}
+                text-dark bg-info
+              {% else %}
+                text-dark bg-light
+              {% endif %} mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ task.name }} <span class="badge bg-dark">ID: {{ task.id }}</span></h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ task.tasktype.name }}</h6>
+            <p class="card-text">{{ task.description }}</p>
+            <a href="{% url 'manager:task-detail' pk=task.id %}" class="card-link">Task detail</a>
+          </div>
+        </div>
+
+      {% endfor %}
+      {% include 'includes/pagination.html' %}
+    </ul>
+  {% else %}
+    <div class="container-fluid">
+      <p>There are no tasks in manager</p>
+    </div>
+  {% endif %}
 {% endblock %}

@@ -11,6 +11,10 @@ class TaskForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
     )
 
+    deadline = forms.DateField(
+        widget=forms.TextInput(attrs={"type": "date"})
+    )
+
     class Meta:
         model = Task
         fields = "__all__"

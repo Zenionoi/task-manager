@@ -3,67 +3,53 @@
 
 {% block content %}
   <div class="container-fluid">
-  <h1>
-    TaskType List
-    <a href="{% url 'manager:tasktype-create' %}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-  </h1>
+    <h1>
+      TaskType List
+      <a href="{% url 'manager:tasktype-create' %}" class="btn btn-primary link-to-page">
+        Create
+      </a>
+    </h1>
 
-  <form action="" method="get" class="form-inline">
-    <div style="display: inline-block">{{ search_form|crispy }}</div>
-    <input class="btn btn-secondary" type="submit" value="🕵️" style="display: inline-block">
-  </form>
-  <br>
+    <form action="" method="get" class="form-inline">
+      <div style="display: inline-block">{{ search_form|crispy }}</div>
+      <input class="btn btn-secondary" type="submit" value="🕵️" style="display: inline-block">
+    </form>
+    <br>
 
-  {% if tasktype_list %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-
-      {% for tasktype in tasktype_list %}
+    {% if tasktype_list %}
+      <table class="table">
         <tr>
-          <td>
-            {{ tasktype.id }}
-          </td>
-          <td>
-            {{ tasktype.name }}
-          </td>
-          <td>
-            <a href="{% url 'manager:tasktype-update' pk=tasktype.id %}">
-              Update
-            </a>
-          </td>
-          <td>
-            <a style="color: red"
-               href="{% url 'manager:tasktype-delete' pk=tasktype.id %}">
-              Delete
-            </a>
-          </td>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Update</th>
+          <th>Delete</th>
         </tr>
-      {% endfor %}
-    </table>
-    {% if is_paginated %}
-      {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}" class="d-inline p-2 btn btn-secondary">Previous</a>
-      {% else %}
-        <button type="button" class="d-inline p-2 btn btn-secondary btn-lg" disabled>Previous</button>
-      {% endif %}
 
-      <h4 class="d-inline p-2 current-page">{{ page_obj.number }}</h4>
-
-      {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}" class="d-inline p-2 btn btn-secondary">Next</a>
-      {% else %}
-        <button type="button" class="d-inline p-2 btn btn-secondary btn-lg" disabled>Next</button>
-      {% endif %}
+        {% for tasktype in tasktype_list %}
+          <tr>
+            <td>
+              {{ tasktype.id }}
+            </td>
+            <td>
+              {{ tasktype.name }}
+            </td>
+            <td>
+              <a href="{% url 'manager:tasktype-update' pk=tasktype.id %}">
+                Update
+              </a>
+            </td>
+            <td>
+              <a style="color: red"
+                 href="{% url 'manager:tasktype-delete' pk=tasktype.id %}">
+                Delete
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+      {% include 'includes/pagination.html' %}
+    {% else %}
+      <p>There are no tasktypes in the service.</p>
     {% endif %}
-  {% else %}
-    <p>There are no tasktypes in the service.</p>
-  {% endif %}
+  </div>
 {% endblock %}
-</div>
