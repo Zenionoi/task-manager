@@ -49,7 +49,7 @@ d.addEventListener("DOMContentLoaded", function(event) {
         });
         headroom.init();
     }
-
+/*
     // dropdowns to show on hover when desktop
     if (d.body.clientWidth > breakpoints.lg) {
         var dropdownElementList = [].slice.call(document.querySelectorAll('.navbar .dropdown-toggle'))
@@ -74,7 +74,7 @@ d.addEventListener("DOMContentLoaded", function(event) {
             
         });
     }
-
+*/
     [].slice.call(d.querySelectorAll('[data-background]')).map(function(el) {
         el.style.background = 'url(' + el.getAttribute('data-background') + ')';
     });
